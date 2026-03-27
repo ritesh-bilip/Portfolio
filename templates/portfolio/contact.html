@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — My Portfolio</title>
+  
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="logo" href="{% url 'index' %}">Ritesh Kumar Das</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'work' %}">Work</a></li>
+      <li><a href="{% url 'service' %}">Services</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── CONTACT ── -->
+  <main id="contact-page" class="page-wrap">
+
+    <div class="page-header">
+      <div class="tag">✦ Let's connect</div>
+      <h2>Contact <span>Me</span></h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- LEFT: Photo + Social Links -->
+      <div>
+        <div class="contact-img-frame">
+          <img src="{% static 'ritesh.jpeg'%}" alt="Contact" />
+
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/ritesh-bilip" target="_blank" class="social-card">
+            <span class="social-icon">🐙</span>
+            <div class="social-info">
+              <div class="sname">GitHub</div>
+              <div class="shandle">@ritesh-bilip</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/ritesh-kumar-das/" target="_blank" class="social-card">
+            <span class="social-icon">💼</span>
+            <div class="social-info">
+              <div class="sname">LinkedIn</div>
+              <div class="shandle">@Ritesh Kumar Das</div>
+            </div>
+          </a>
+          <a href="https://x.com/ritesh_kumardev" target="_blank" class="social-card">
+            <span class="social-icon">🐦</span>
+            <div class="social-info">
+              <div class="sname">Twitter / X</div>
+              <div class="shandle">@ritesh_kumardev</div>
+            </div>
+          </a>
+          <a href="https://www.instagram.com/ritesh_kr._das/" target="_blank" class="social-card">
+            <span class="social-icon">📸</span>
+            <div class="social-info">
+              <div class="sname">Instagram</div>
+              <div class="shandle">@ritesh_kr._das</div>
+            </div>
+          </a>
+          <a href="mailto:dasritesh537@email.com" class="social-card">
+            <span class="social-icon">📧</span>
+            <div class="social-info">
+              <div class="sname">Email</div>
+              <div class="shandle">dasritesh537@email.com</div>
+            </div>
+          </a>
+          <a href="https://wa.me/917047648483" target="_blank" class="social-card">
+            <span class="social-icon">💬</span>
+            <div class="social-info">
+              <div class="sname">WhatsApp</div>
+              <div class="shandle">+91 7047648483</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Feedback / Contact Form -->
+      <div class="feedback-card">
+        <h3>Send me a Message</h3>
+        <p class="sub">Have a project in mind? A question? Or just want to say hi? Fill this out and I'll get back to
+          you within 24 hours.</p>
+          {% csrf_token %}
+        <div class="form-row">
+          
+          <div class="form-group">
+            <label>Your Name</label>
+            {{ form.name }}
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            {{ form.email }}
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          {{ form.subject }}
+
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          {{form.message}}
+        </div>
+        <button class="submit-btn" onclick="submitForm()">Send Message ✉️</button>
+        <div class="success-msg" id="successMsg">✅ Message saved! Download it below.</div>
+
+        <!-- ── SUBMISSIONS PANEL ── -->
+        <div class="dl-panel" id="dlPanel">
+          <div class="dl-panel-header">
+            <div>
+              <div class="dl-panel-title">📥 Saved Submissions</div>
+              <div class="dl-panel-count" id="dlCount">0 messages saved</div>
+            </div>
+            <div class="dl-btns">
+              <button class="dl-btn excel" onclick="downloadExcel()">📊 Download Excel (.csv)</button>
+              <button class="dl-btn docx" onclick="downloadDocx()">📄 Download Word (.docx)</button>
+              <button class="dl-btn clear" onclick="clearAll()">🗑 Clear</button>
+            </div>
+          </div>
+          <div class="sub-table-wrap">
+            <table class="sub-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Date &amp; Time</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Message</th>
+                </tr>
+              </thead>
+              <tbody id="subBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  {%load static %}
+  <script src="{% static 'nav.js' %}"></script>
+  <script>
+    // ── STORAGE ──
+    let submissions = JSON.parse(localStorage.getItem('portfolio_msgs') || '[]');
+
+    function save() { localStorage.setItem('portfolio_msgs', JSON.stringify(submissions)); }
+
+    function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+    function xmlEsc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;'); }
+
+    function render() {
+      const panel = document.getElementById('dlPanel');
+      const body = document.getElementById('subBody');
+      const cnt = document.getElementById('dlCount');
+      if (!submissions.length) { panel.style.display = 'none'; return; }
+      panel.style.display = 'block';
+      cnt.textContent = submissions.length + ' message' + (submissions.length > 1 ? 's' : '') + ' saved';
+      body.innerHTML = submissions.map((s, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td style="white-space:nowrap">${esc(s.date)}</td>
+      <td class="name">${esc(s.name)}</td>
+      <td class="email">${esc(s.email)}</td>
+      <td>${esc(s.subject || '—')}</td>
+      <td class="msg" title="${esc(s.message)}">${esc(s.message)}</td>
+    </tr>
+  `).join('');
+    }
+
+    // ── SUBMIT ──
+    function submitForm() {
+      const name = document.getElementById('id_name').value.trim();
+      const email = document.getElementById('id_email').value.trim();
+      const subject = document.getElementById('id_subject').value.trim();
+      const msg = document.getElementById('id_message').value.trim();
+      if (!name || !email || !msg) { alert('Please fill in Name, Email and Message.'); return; }
+      const now = new Date();
+      submissions.push({
+        date: now.toLocaleDateString('en-IN') + ' ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+        name, email, subject, message: msg
+      });
+      save(); render();
+      ['id_name', 'id_email', 'id_subject', 'id_message'].forEach(id => document.getElementById(id).value = '');
+      const sm = document.getElementById('successMsg');
+      sm.classList.add('show');
+      setTimeout(() => sm.classList.remove('show'), 4000);
+    }
+
+    // ── CLEAR ──
+    function clearAll() {
+      if (!confirm('Delete all saved messages?')) return;
+      submissions = []; save(); render();
+    }
+
+    // ── DOWNLOAD CSV (Excel) ──
+    function downloadExcel() {
+      if (!submissions.length) { alert('No submissions yet!'); return; }
+      const hdr = ['#', 'Date & Time', 'Name', 'Email', 'Subject', 'Message'];
+      const rows = submissions.map((s, i) => [
+        i + 1,
+        `"${s.date}"`,
+        `"${s.name.replace(/"/g, '""')}"`,
+        `"${s.email.replace(/"/g, '""')}"`,
+        `"${(s.subject || '').replace(/"/g, '""')}"`,
+        `"${s.message.replace(/"/g, '""').replace(/\n/g, ' ')}"`
+      ]);
+      const csv = [hdr.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'portfolio_messages.csv' });
+      a.click(); URL.revokeObjectURL(a.href);
+    }
+
+    // ── DOWNLOAD DOCX ──
+    function downloadDocx() {
+      if (!submissions.length) { alert('No submissions yet!'); return; }
+      const tableRows = submissions.map((s, i) => `
+    <w:tr>
+      <w:tc><w:tcPr><w:tcW w:w="400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${i % 2 === 0 ? 'F3F4F6' : 'FFFFFF'}"/></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>${i + 1}</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${i % 2 === 0 ? 'F3F4F6' : 'FFFFFF'}"/></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>${xmlEsc(s.date)}</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${i % 2 === 0 ? 'F3F4F6' : 'FFFFFF'}"/></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>${xmlEsc(s.name)}</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${i % 2 === 0 ? 'F3F4F6' : 'FFFFFF'}"/></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>${xmlEsc(s.email)}</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${i % 2 === 0 ? 'F3F4F6' : 'FFFFFF'}"/></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>${xmlEsc(s.subject || '—')}</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="2600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${i % 2 === 0 ? 'F3F4F6' : 'FFFFFF'}"/></w:tcPr><w:p><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t xml:space="preserve">${xmlEsc(s.message)}</w:t></w:r></w:p></w:tc>
+    </w:tr>`).join('');
+
+      const docXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+<w:body>
+  <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:b/><w:sz w:val="36"/><w:color w:val="1F4E79"/></w:rPr><w:t>Portfolio — Contact Form Submissions</w:t></w:r></w:p>
+  <w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:sz w:val="20"/><w:color w:val="888888"/></w:rPr><w:t>Downloaded: ${xmlEsc(new Date().toLocaleString('en-IN'))} | Total: ${submissions.length} message(s)</w:t></w:r></w:p>
+  <w:p><w:r><w:t></w:t></w:r></w:p>
+  <w:tbl>
+    <w:tblPr><w:tblW w:w="9600" w:type="dxa"/><w:tblBorders><w:top w:val="single" w:sz="4" w:color="AED6F1"/><w:left w:val="single" w:sz="4" w:color="AED6F1"/><w:bottom w:val="single" w:sz="4" w:color="AED6F1"/><w:right w:val="single" w:sz="4" w:color="AED6F1"/><w:insideH w:val="single" w:sz="4" w:color="AED6F1"/><w:insideV w:val="single" w:sz="4" w:color="AED6F1"/></w:tblBorders></w:tblPr>
+    <w:tr>
+      <w:tc><w:tcPr><w:tcW w:w="400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="1F4E79"/></w:tcPr><w:p><w:r><w:rPr><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>#</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="1F4E79"/></w:tcPr><w:p><w:r><w:rPr><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>Date &amp; Time</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="1F4E79"/></w:tcPr><w:p><w:r><w:rPr><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>Name</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="2000" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="1F4E79"/></w:tcPr><w:p><w:r><w:rPr><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>Email</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="1600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="1F4E79"/></w:tcPr><w:p><w:r><w:rPr><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>Subject</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="2600" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="1F4E79"/></w:tcPr><w:p><w:r><w:rPr><w:b/><w:sz w:val="20"/><w:color w:val="FFFFFF"/></w:rPr><w:t>Message</w:t></w:r></w:p></w:tc>
+    </w:tr>
+    ${tableRows}
+  </w:tbl>
+  <w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="720" w:right="720" w:bottom="720" w:left="720"/></w:sectPr>
+</w:body>
+</w:document>`;
+
+      buildDocx(docXml);
+    }
+
+    async function buildDocx(docXml) {
+      if (typeof JSZip === 'undefined') {
+        await new Promise(res => {
+          const s = document.createElement('script');
+          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+          s.onload = res; document.head.appendChild(s);
+        });
+      }
+      const zip = new JSZip();
+      zip.file('[Content_Types].xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>`);
+      zip.file('_rels/.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`);
+      zip.file('word/document.xml', docXml);
+      zip.file('word/_rels/document.xml.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>`);
+      const blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'portfolio_messages.docx' });
+      a.click(); URL.revokeObjectURL(a.href);
+    }
+
+    // init
+    render();
+</script>
+</body >
+</html >

@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — My Portfolio</title>
+  <!-- <link rel="stylesheet" href="style.css" />
+    -->
+{% load static %}
+
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="logo" href="{% url 'index' %}">Ritesh Kumar Das</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'work' %}">Work</a></li>
+      <li><a href="{% url 'service' %}">Services</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── ABOUT ── -->
+  <main id="about-page" class="page-wrap">
+
+    <div class="page-header">
+      <div class="tag">✦ Get to know me</div>
+      <h2>About <span>Me</span></h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="about-grid">
+
+      <!-- LEFT: Photo -->
+      <div class="about-img-wrap">
+        <div class="about-img-frame">
+           <img src="{% static 'ritesh.jpeg'%}" alt="About Me"/>
+          
+        </div>
+        <div class="exp-badge">
+          <div class="big">3+</div>
+          <div class="sm">Years of<br>Experience</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Info -->
+      <div class="about-info">
+        <h3>I build things for the web — and I love it.</h3>
+        <p class="bio">
+          Hello! I'm <strong style="color:var(--gold)">Ritesh Kumar Das</strong>,I’m Ritesh Kumar Das, a passionate
+          Computer Science student on a focused journey to become a Software Engineer with AI specialization.<br><br>
+          I started coding at age 19 and have been obsessed ever since. I believe great software is as much about
+          the user experience as it is about the code behind it. When I'm not building, I'm learning — constantly
+          exploring new technologies.
+          I come from a tier-college background, so I know what real effort and consistency mean. Every day, I’m
+          building strong fundamentals in Data Structures & Algorithms (Java), mastering backend development with Spring
+          Boot, Django, and PostgreSQL, and integrating AI technologies to create smart, scalable systems.
+
+          My goal is to build a career where software engineering meets artificial intelligence, developing applications
+          that are not just functional but intelligent.
+
+          💡 Current Focus:
+
+          Backend Development (Java Spring Boot, Python Django)
+
+          Database Mastery (PostgreSQL, Optimization, Design)
+
+          AI Integration (Machine Learning for Smart Apps)
+
+          DSA for MNC-level interviews
+
+          🚀 I believe in discipline, deep learning, and building real-world projects that speak louder than resumes.
+
+          📬 Let’s connect if you’re passionate about coding, AI, or creating something meaningful through technology.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="key">Name</div>
+            <div class="val">Ritesh Kumar Das</div>
+          </div>
+          <div class="info-item">
+            <div class="key">Email</div>
+            <div class="val">darritesh537@email.com</div>
+          </div>
+          <div class="info-item">
+            <div class="key">Location</div>
+            <div class="val">kolkata, India</div>
+          </div>
+          <div class="info-item">
+            <div class="key">Education</div>
+            <div class="val">B.Tech Computer Science</div>
+          </div>
+          <div class="info-item">
+            <div class="key">Degree</div>
+            <div class="val">Bachelor of Technology</div>
+          </div>
+          <div class="info-item">
+            <div class="key">Availability</div>
+            <div class="val" style="color:#86efac">✓ Open to Work</div>
+          </div>
+        </div>
+
+        <div class="skills-title">Technical Skills</div>
+        <div class="skills-wrap">
+          <span class="skill-pill">HTML5</span>
+          <span class="skill-pill">CSS3</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">Flutter</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Django</span>
+          <span class="skill-pill">Postgresql</span>
+          <span class="skill-pill">Git &amp; GitHub</span>
+          <!-- <span class="skill-pill">Figma</span> -->
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">Websocket</span>
+          <span class="skill-pill">Docker</span>
+
+        </div>
+
+        <div style="margin-top:32px">
+          <a class="btn-gold" href="{% static 'Ritesh_Kumar_Das_Resume_1_Django_Backend.pdf'%}">Download Resume ↓</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- <script src="nav.js"></script> -->
+{% load static %}
+  <script src="{% static 'nav.js' %}"></script>
+</body>
+
+</html>

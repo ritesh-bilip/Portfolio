@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Services — My Portfolio</title>
+{% load static %}
+<!-- <link rel="stylesheet" href="style.css"/> -->
+<link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="logo" href="{% url 'index' %}">Rites Kumar Das</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'work' %}">Work</a></li>
+    <li><a href="{% url 'service' %}">Services</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── SERVICES ── -->
+<main id="services-page" class="page-wrap">
+
+  <div class="page-header">
+    <div class="tag">✦ What I offer</div>
+    <h2>My <span>Services</span></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="services-layout">
+
+    <!-- LEFT: Sticky Photo + Quote -->
+    <div>
+      <div class="services-img-frame">
+        <img src="{% static 'ritesh.jpeg'%}" alt="Services"/>
+        
+      </div>
+      <div class="services-quote">
+        <p>"I don't just write code — I solve problems, tell stories through design, and build products that people love to use."</p>
+        <cite>— Ritesh</cite>
+      </div>
+    </div>
+
+    <!-- RIGHT: Service Cards -->
+    <div class="services-cards">
+
+      <div class="service-card">
+        <span class="service-icon">🌐</span>
+        <h4>Web Development</h4>
+        <p>Full-stack web applications built with modern frameworks — fast, secure, and scalable.</p>
+        <ul class="service-features">
+          <li>React /Flutter Frontend</li>
+          <li>Django Backend</li>
+          <li>Database Design &amp; Optimization</li>
+          <li>API Development &amp; Integration</li>
+        </ul>
+        <div class="service-price">Starting from <strong>₹5,000</strong></div>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🎨</span>
+        <h4>UI/UX Design</h4>
+        <p>Beautiful, intuitive interfaces designed in Figma — from wireframes to pixel-perfect prototypes.</p>
+        <ul class="service-features">
+          <li>User Research &amp; Personas</li>
+          <li>Wireframing &amp; Prototyping</li>
+          <li>Responsive Design Systems</li>
+          <li>Figma to Code Handoff</li>
+        </ul>
+        <div class="service-price">Starting from <strong>₹3,000</strong></div>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">📱</span>
+        <h4>Mobile Development</h4>
+        <p>Cross-platform mobile apps for iOS and Android using React Native — one codebase, two platforms.</p>
+        <ul class="service-features">
+          <li>React Native Apps</li>
+          <li>Push Notifications</li>
+          <li>Offline-first Architecture</li>
+          <li>App Store Deployment</li>
+        </ul>
+        <div class="service-price">Starting from <strong>₹8,000</strong></div>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🔧</span>
+        <h4>Maintenance &amp; Support</h4>
+        <p>Keep your existing app running smoothly — bug fixes, performance tuning, and feature additions.</p>
+        <ul class="service-features">
+          <li>Bug Fixes &amp; Debugging</li>
+          <li>Performance Optimization</li>
+          <li>Security Audits</li>
+          <li>Monthly Retainer Plans</li>
+        </ul>
+        <div class="service-price">Starting from <strong>₹2,000/mo</strong></div>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">☁️</span>
+        <h4>Cloud &amp; DevOps</h4>
+        <p>Deploy and manage your applications on AWS, GCP, or Azure with CI/CD pipelines.</p>
+        <ul class="service-features">
+          <li>Docker &amp; Kubernetes</li>
+          <li>AWS / GCP Setup</li>
+          <li>CI/CD Pipelines</li>
+          <li>Monitoring &amp; Alerts</li>
+        </ul>
+        <div class="service-price">Starting from <strong>₹4,000</strong></div>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">🤖</span>
+        <h4>AI Integration</h4>
+        <p>Add intelligent features to your product — chatbots, recommendations, and automation.</p>
+        <ul class="service-features">
+          <li>OpenAI / Gemini Integration</li>
+          <li>Chatbot Development</li>
+          <li>ML Model Deployment</li>
+          <li>Data Analysis Pipelines</li>
+        </ul>
+        <div class="service-price">Starting from <strong>₹6,000</strong></div>
+      </div>
+      {% for service in services %}
+        <div class="service-card">
+          <span class="service-icon">🌐</span>
+          <h4>{{ service.title }}</h4>
+          <p>{{ service.introduction }}</p>
+          <ul class="service-features">
+            {% for feature in service.features.all %}
+            <li>{{ feature.text }}</li>
+            {% endfor %}
+          </ul>
+          <div class="service-price">
+            Starting from <strong>₹{{ service.price }}</strong>
+          </div>
+        </div>
+        {% endfor %}
+
+    </div>
+  </div>
+</main>
+
+<!-- <script src="nav.js"></script> -->
+ {% load static %}
+<script src="{% static 'nav.js' %}"></script>
+</body>
+</html>

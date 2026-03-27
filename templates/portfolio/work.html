@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — My Portfolio</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a class="logo" href="{% url 'index' %}">Ritesh Kumar Das</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'work' %}">Work</a></li>
+      <li><a href="{% url 'service' %}">Services</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── WORK ── -->
+  <main id="work-page" class="page-wrap">
+
+    <div class="page-header">
+      <div class="tag">✦ What I've built</div>
+      <h2>My <span>Projects</span></h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      <!-- Vehicle Rental System -->
+      <div class="project-card">
+        <div class="project-thumb">🚗<span class="project-tag">Web Application</span></div>
+        <div class="project-body">
+          <h4>Vehicle Rental System</h4>
+          <p>A Django-based web application for managing vehicle rentals with live route mapping, automatic price
+            calculation, and user-friendly booking workflows. Production-grade and scalable.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Frontend</span>
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Backend</span>
+            <span class="tech-tag">Django</span>
+            <span class="tech-tag">REST API</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Google Maps API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://vehiclerentalsystem-2-58cy.onrender.com/" class="proj-btn primary">Live Demo</a>
+            <a href="https://github.com/ritesh-bilip/VehicleRentalSystem" class="proj-btn secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AccessForge -->
+      <div class="project-card">
+        <div class="project-thumb">💬<span class="project-tag">Authentication</span></div>
+        <div class="project-body">
+          <h4>AccessForge</h4>
+          <p>Real-time authentication system with email/username login/signup, smooth login/logout features.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Frontend</span>
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Backend</span>
+            <span class="tech-tag">Django</span>
+            <span class="tech-tag">Django Auth</span>
+            <span class="tech-tag">JWT</span>
+            <span class="tech-tag">PostgreSQL</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/ritesh-bilip/AccessForge" class="proj-btn secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Face Recognition -->
+      <div class="project-card">
+        <div class="project-thumb">📊<span class="project-tag">Computer Vision</span></div>
+        <div class="project-body">
+          <h4>Face Recognition</h4>
+          <p>Real-time face detection using camera feed, efficient matching against known faces database, easily
+            customizable.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">OpenCV</span>
+            <span class="tech-tag">PostgreSQL</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/ritesh-bilip/FaceRecognition-Project" class="proj-btn secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Login UI -->
+      <div class="project-card">
+        <div class="project-thumb">🤖<span class="project-tag">Academics</span></div>
+        <div class="project-body">
+          <h4>Student Login UI</h4>
+          <p>Student management system with secure login/logout for academic tracking.</p>
+          <div class="project-tech">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">REST API</span>
+            <span class="tech-tag">Django</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/ritesh-bilip/Student_loginUI" class="proj-btn secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task Manager App -->
+      <div class="project-card">
+        <div class="project-thumb">📱<span class="project-tag">Mobile</span></div>
+        <div class="project-body">
+          <h4>Task Manager App</h4>
+          <p>Productivity app with drag-and-drop boards, reminders, team collaboration, and offline mode.</p>
+          <div class="project-tech">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Redux</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-btn primary">Live Demo</a>
+            <a href="#" class="proj-btn secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Projects Placeholder -->
+
+      {% for project in projects %}
+      <div class="project-card">
+        <div class="project-thumb">{{ project.emoji|default:"🚀" }}<span class="project-tag">{{ project.project_tag
+            }}</span></div>
+        <div class="project-body">
+          <h4>{{ project.project_title }}</h4>
+          <p>{{ project.project_intro }}</p>
+          <div class="project-tech">
+            {% for tech in project.techs.all %}
+            <span class="tech-tag">{{ tech.name }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-links">
+            {% if project.live_demo %}
+            <a href="{{ project.live_demo }}" class="proj-btn primary">Live Demo</a>
+            {% endif %}
+            {% if project.github_link %}
+            <a href="{{ project.github_link }}" class="proj-btn secondary">GitHub</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+    </div>
+
+    <!-- GitHub Section -->
+    <div class="github-section">
+      <div class="gh-icon">🐙</div>
+      <div class="gh-info">
+        <h3>Find me on GitHub</h3>
+        <p>All my projects, open-source contributions, and experiments live on GitHub. I push code every day — check
+          out my repositories and feel free to collaborate!</p>
+        <div class="gh-stats">
+          {% for stat in stats %}
+          <div class="gh-stat">
+            <div class="n">{{ stat.repos }}</div>
+            <div class="l">Repos</div>
+          </div>
+          <div class="gh-stat">
+            <div class="n">{{ stat.commits }}</div>
+            <div class="l">Commits</div>
+          </div>
+          <div class="gh-stat">
+            <div class="n">{{ stat.stars }}</div>
+            <div class="l">Stars</div>
+          </div>
+          <div class="gh-stat">
+            <div class="n">{{ stat.forks }}</div>
+            <div class="l">Forks</div>
+          </div>
+          {% endfor %}
+        </div>
+        <a href="https://github.com/ritesh-bilip" target="_blank" class="btn-gold">Visit GitHub Profile →</a>
+      </div>
+    </div>
+
+  </main>
+
+  {% load static %}
+  <script src="{% static 'nav.js' %}"></script>
+</body>
+
+</html>

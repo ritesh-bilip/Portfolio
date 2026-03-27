@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Home — My Portfolio</title>
+<!-- <link rel="stylesheet" href="style.css"/> -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="logo" href="{% url 'index' %}">Ritesh Kumar Das</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'work' %}">Work</a></li>
+    <li><a href="{% url 'service' %}">Services</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HOME ── -->
+<main id="home-page" class="page-wrap">
+  <div class="home-bg-circle"></div>
+  <div class="home-grid">
+
+    <!-- LEFT: Text -->
+    <div class="home-text">
+      <div class="tag">✦ Welcome to my portfolio</div>
+      <h1>Hi, I'm <span>Your<br>Ritesh Kumar Das</span></h1>
+      <p class="role">Full Stack Developer &amp; UI Designer</p>
+      <p class="welcome">I craft beautiful, high-performance digital experiences — from concept to deployment. Passionate about clean code, elegant interfaces, and solving real problems with technology.</p>
+      <div class="home-btns">
+        <a class="btn-gold" href="work.html">View My Work</a>
+        <a class="btn-outline" href="contact.html">Get In Touch</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><div class="num">3+</div><div class="lbl">Years Exp.</div></div>
+        <div class="stat"><div class="num">20+</div><div class="lbl">Projects</div></div>
+        <div class="stat"><div class="num">15+</div><div class="lbl">Clients</div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Photo -->
+    <div class="home-img-wrap">
+      <div class="home-img-ring">
+        <img src="{% static 'ritesh.jpeg'%}" alt="Your Name"/>
+        <div class="home-img-placeholder"><span></span></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% load static %}
+<script src="{% static 'nav.js' %}"></script>
+</body>
+</html>
