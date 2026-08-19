@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Services & Skills — Ritesh Kumar Das{% endblock %}
+
+{% block content %}
+<div class="section-container">
+    <h1 class="page-header">Skills & <span>Services</span></h1>
+    
+    {% for category, skill_list in grouped_skills.items %}
+        <div class="skill-category">
+            <h2>{{ category }}</h2>
+            <div class="tags">
+                {% for skill in skill_list %}
+                    <span class="tag-item">
+                        {% if skill.icon %}<i class="{{ skill.icon }}"></i>{% endif %}
+                        {{ skill.name }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    {% empty %}
+        <p>No skills added yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
