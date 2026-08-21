@@ -8,19 +8,19 @@ from django.contrib import messages
 # Create your views here.
 class ProfileView(viewsets.ModelViewSet):
    queryset=Profile.objects.all()
-   serializer=ProfileSerializer
+   serializer_class=ProfileSerializer
 class SkillView(viewsets.ModelViewSet):
    queryset=Skill.objects.all()
-   serializer=SkillSerializer
+   serializer_class=SkillSerializer
 class ProjectView(viewsets.ModelViewSet):
    queryset=Project.objects.all()
-   serializer=ProjectSerializer
+   serializer_class=ProjectSerializer
 class EducationVIew(viewsets.ModelViewSet):
    queryset=Education.objects.all()
-   serializer=EducationSerializer
+   serializer_class=EducationSerializer
 class CertificationView(viewsets.ModelViewSet):
    queryset=Certification.objects.all()
-   serializer=CertificationSerializer
+   serializer_class=CertificationSerializer
 class ContactView(generics.CreateAPIView):
    serializer_class=ContactMessageSerializer
 
