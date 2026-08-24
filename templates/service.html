@@ -1,25 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}Services & Skills — Ritesh Kumar Das{% endblock %}
+{% block title %}Stack — Python, Django & AI/ML{% endblock %}
 
 {% block content %}
-<div class="section-container">
-    <h1 class="page-header">Skills & <span>Services</span></h1>
-    
+<div class="section-container" id="services-page">
+    <h1 class="page-header">The technical <span>stack.</span></h1>
+    <p class="section-lead">From the first data model to the last deployed endpoint, I design software that is
+        observable, maintainable, and ready to grow.</p>
+
     {% for category, skill_list in grouped_skills.items %}
-        <div class="skill-category">
-            <h2>{{ category }}</h2>
-            <div class="tags">
-                {% for skill in skill_list %}
-                    <span class="tag-item">
-                        {% if skill.icon %}<i class="{{ skill.icon }}"></i>{% endif %}
-                        {{ skill.name }}
-                    </span>
-                {% endfor %}
-            </div>
+    <div class="skill-category">
+        <h2>{{ category }}</h2>
+        <div class="tags">
+            {% for skill in skill_list %}
+            <span class="tag-item">
+                {% if skill.icon %}<i class="{{ skill.icon }}"></i>{% endif %}
+                {{ skill.name }}
+            </span>
+            {% endfor %}
         </div>
+    </div>
     {% empty %}
-        <p>No skills added yet.</p>
+    <p>No skills added yet.</p>
     {% endfor %}
 </div>
 {% endblock %}

@@ -30,8 +30,6 @@ class Profile(models.Model):
         default=True,
         help_text="Shows an 'open to work' badge in the hero.",
     )
-
-    profile_image = models.ImageField(upload_to='profile/', blank=True, null=True)
     resume_file = models.FileField(
         upload_to='resume/', blank=True, null=True,
         help_text="Upload a PDF so visitors can download your latest resume.",

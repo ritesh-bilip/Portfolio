@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}About — Ritesh Kumar Das{% endblock %}
+{% block title %}About — Ritesh Das, Python Backend Developer{% endblock %}
 
 {% block content %}
-<div class="section-container">
-    <h1 class="page-header">About <span>Me</span></h1>
-    
+<div class="section-container" id="about-page">
+    <h1 class="page-header">About <span>the maker.</span></h1>
+
     <div class="about-grid">
         <div class="about-card">
-            <h2>Summary</h2>
+            <h2>Backend engineer with range.</h2>
             <p>{{ profile.summary }}</p>
+            <p>My core focus is Python backend development with Django, REST APIs, databases, authentication, and AI/ML
+                integrations that are practical in production.</p>
             <p><strong>Location:</strong> {{ profile.location }}</p>
             {% if profile.extracurricular %}
-                <p><strong>Activities:</strong> {{ profile.extracurricular }}</p>
+            <p><strong>Activities:</strong> {{ profile.extracurricular }}</p>
             {% endif %}
 
             <div class="home-btns" style="margin-top: 1.5rem;">
                 {% if profile.resume_file %}
-                    <a href="{{ profile.resume_file.url }}" class="btn-gold" download>Download Resume</a>
+                <a href="{{ profile.resume_file.url }}" class="btn-primary" download>Download resume <i
+                        class="fa-solid fa-download"></i></a>
                 {% endif %}
             </div>
         </div>
@@ -26,14 +29,14 @@
             <h2>Education</h2>
             <div class="timeline">
                 {% for edu in education %}
-                    <div class="timeline-item">
-                        <span class="period">{{ edu.period }}</span>
-                        <h3>{{ edu.degree }}</h3>
-                        <p>{{ edu.institution }}</p>
-                        {% if edu.board_or_note %}<small>{{ edu.board_or_note }}</small>{% endif %}
-                    </div>
+                <div class="timeline-item">
+                    <span class="period">{{ edu.period }}</span>
+                    <h3>{{ edu.degree }}</h3>
+                    <p>{{ edu.institution }}</p>
+                    {% if edu.board_or_note %}<small>{{ edu.board_or_note }}</small>{% endif %}
+                </div>
                 {% empty %}
-                    <p>No education history added yet.</p>
+                <p>No education history added yet.</p>
                 {% endfor %}
             </div>
         </div>
@@ -42,16 +45,17 @@
     <h2 class="sub-header">Certifications</h2>
     <div class="cards-grid">
         {% for cert in certifications %}
-            <div class="card">
-                <span class="period">{{ cert.issue_date }}</span>
-                <h3>{{ cert.title }}</h3>
-                <p>{{ cert.issuer }}</p>
-                {% if cert.credential_url %}
-                    <a href="{{ cert.credential_url }}" target="_blank" class="link-btn">Verify Credential <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                {% endif %}
-            </div>
+        <div class="card">
+            <span class="period">{{ cert.issue_date }}</span>
+            <h3>{{ cert.title }}</h3>
+            <p>{{ cert.issuer }}</p>
+            {% if cert.credential_url %}
+            <a href="{{ cert.credential_url }}" target="_blank" class="link-btn">Verify Credential <i
+                    class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            {% endif %}
+        </div>
         {% empty %}
-            <p>No certifications added yet.</p>
+        <p>No certifications added yet.</p>
         {% endfor %}
     </div>
 </div>

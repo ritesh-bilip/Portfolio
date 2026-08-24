@@ -1,34 +1,37 @@
 {% extends 'base.html' %}
 
-{% block title %}Work — Ritesh Kumar Das{% endblock %}
+{% block title %}Work — Django, APIs & AI/ML Projects{% endblock %}
 
 {% block content %}
-<div class="section-container">
-    <h1 class="page-header">My <span>Work</span></h1>
+<div class="section-container" id="work-page">
+    <h1 class="page-header">Selected <span>systems.</span></h1>
+    <p class="section-lead">A growing body of Django backends, API products, automation, and intelligent features.</p>
     <div class="cards-grid">
         {% for project in projects %}
-            <div class="card project-card">
-                {% if project.image %}
-                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
-                {% endif %}
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.short_description }}</p>
-                <div class="tags">
-                    {% for tech in project.tech_stack %}
-                        <span class="tag-item">{{ tech }}</span>
-                    {% endfor %}
-                </div>
-                <div class="home-btns">
-                    {% if project.github_url %}
-                        <a href="{{ project.github_url }}" target="_blank" class="btn-outline">Code</a>
-                    {% endif %}
-                    {% if project.live_url %}
-                        <a href="{{ project.live_url }}" target="_blank" class="btn-gold">Live Demo</a>
-                    {% endif %}
-                </div>
+        <div class="card project-card">
+            {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
+            {% endif %}
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.short_description }}</p>
+            <div class="tags">
+                {% for tech in project.tech_stack %}
+                <span class="tag-item">{{ tech }}</span>
+                {% endfor %}
             </div>
+            <div class="home-btns">
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" class="btn-quiet">View source <i
+                        class="fa-brands fa-github"></i></a>
+                {% endif %}
+                {% if project.live_url %}
+                <a href="{{ project.live_url }}" target="_blank" class="btn-primary">Open live project <i
+                        class="fa-solid fa-arrow-up-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
         {% empty %}
-            <p>No projects available right now.</p>
+        <p>No projects available right now.</p>
         {% endfor %}
     </div>
 </div>

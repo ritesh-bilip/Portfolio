@@ -1,34 +1,57 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Home — Ritesh Kumar Das{% endblock %}
+{% block title %}Ritesh Das — Python Backend & AI/ML Developer{% endblock %}
 
 {% block content %}
 <main id="home-page">
-  <div class="home-bg-circle"></div>
+  <div class="hero-orbit orbit-one"></div>
+  <div class="hero-orbit orbit-two"></div>
+  <div class="hero-beam"></div>
   <div class="home-grid">
     <div class="home-text">
       {% if profile.is_open_to_work %}
-        <div class="tag">✦ Available for work</div>
+      <div class="eyebrow"><span class="status-dot"></span> Available for new collaborations</div>
       {% endif %}
-      <h1>Hi, I'm <span>{{ profile.full_name }}</span></h1>
-      <p class="role">{{ profile.tagline }}</p>
+      <p class="hero-kicker">Python backend engineer / 01 - 05</p>
+      <h1>Engineering intelligent<br><span>systems that scale.</span></h1>
+      <p class="role">Python Backend Developer / Django + AI/ML</p>
       <p class="welcome">{{ profile.summary }}</p>
       <div class="home-btns">
-        <a class="btn-gold" href="{% url 'work' %}">View My Work</a>
-        <a class="btn-outline" href="{% url 'contact' %}">Get In Touch</a>
+        <a class="btn-primary" href="{% url 'work' %}">Explore selected work <i
+            class="fa-solid fa-arrow-up-right"></i></a>
+        <a class="btn-quiet" href="{% url 'contact' %}">Start a conversation <i class="fa-solid fa-arrow-right"></i></a>
       </div>
+      <div class="hero-meta"><span>Based in {{ profile.location }}</span><span class="meta-line"></span><span>Available
+          worldwide</span></div>
     </div>
 
     <div class="home-img-wrap">
-      <div class="home-img-ring">
-        {% if profile.profile_image %}
-          <img src="{{ profile.profile_image.url }}" alt="{{ profile.full_name }}"/>
-        {% else %}
-          <img src="{% static 'ritesh.jpeg' %}" alt="{{ profile.full_name }}"/>
-        {% endif %}
+      <div class="hero-scene" data-tilt>
+        <div class="scene-label label-top">PORTFOLIO / 2026</div>
+        <div class="scene-label label-bottom">SCROLL TO DISCOVER</div>
+        <div class="scene-core">
+          {% if profile.profile_image %}
+          <img src="{{ profile.profile_image.url }}" alt="{{ profile.full_name }}" />
+          {% else %}
+          <div class="home-img-placeholder"><i class="fa-solid fa-cube"></i><span>Backend + AI/ML</span></div>
+          {% endif %}
+        </div>
+        <div class="scene-ring ring-a"></div>
+        <div class="scene-ring ring-b"></div>
+        <div class="scene-card card-a">PY<br><strong>DJ</strong></div>
+        <div class="scene-card card-b">API<br><strong>8</strong></div>
       </div>
     </div>
   </div>
+  <a class="scroll-cue" href="#home-next"><span></span> Scroll to explore</a>
 </main>
+<section class="home-next" id="home-next">
+  <div class="section-intro"><span class="eyebrow">Backend systems with intelligence</span>
+    <p>I build production-ready Django APIs, data workflows, and AI features that turn complex ideas into useful
+      software.</p>
+  </div>
+  <div class="signal-row"><span>01</span><strong>Reliable foundations. Smarter products.</strong><span>Python / Django /
+      AI/ML</span></div>
+</section>
 {% endblock %}

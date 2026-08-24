@@ -12,11 +12,17 @@
 
 // ── HAMBURGER ──
 function toggleMenu() {
-  document.getElementById("navLinks").classList.toggle("open");
+  const navLinks = document.getElementById("navLinks");
+  const hamburger = document.querySelector(".hamburger");
+  const isOpen = navLinks.classList.toggle("open");
+  hamburger?.setAttribute("aria-expanded", String(isOpen));
 }
 document.addEventListener("click", (e) => {
   if (!e.target.closest("nav")) {
     document.getElementById("navLinks")?.classList.remove("open");
+    document
+      .querySelector(".hamburger")
+      ?.setAttribute("aria-expanded", "false");
   }
 });
 
@@ -47,4 +53,21 @@ if (_cur && _ring) {
         _ring.style.transform = "translate(-50%,-50%) scale(1)";
       });
     });
+}
+
+// Give the hero object a restrained depth response without a 3D dependency.
+const tiltScene = document.querySelector("[data-tilt]");
+if (
+  tiltScene &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+  tiltScene.addEventListener("pointermove", (event) => {
+    const bounds = tiltScene.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    tiltScene.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 10}deg)`;
+  });
+  tiltScene.addEventListener("pointerleave", () => {
+    tiltScene.style.transform = "rotateX(0deg) rotateY(0deg)";
+  });
 }

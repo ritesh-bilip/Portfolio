@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}Contact — Ritesh Kumar Das{% endblock %}
+{% block title %}Contact — Build with Ritesh Das{% endblock %}
 
 {% block content %}
-<div class="section-container">
-    <h1 class="page-header">Get In <span>Touch</span></h1>
-    
+<div class="section-container" id="contact-page">
+    <h1 class="page-header">Let's build <span>what's next.</span></h1>
+    <p class="section-lead">Have a Django backend, API platform, automation workflow, or AI/ML product in mind? Tell me
+        where you want to go.</p>
+
     {% if messages %}
-        {% for message in messages %}
-            <div class="alert-success">{{ message }}</div>
-        {% endfor %}
+    {% for message in messages %}
+    <div class="alert-success">{{ message }}</div>
+    {% endfor %}
     {% endif %}
 
     <div class="contact-wrap">
@@ -31,7 +33,7 @@
                 <label>Message</label>
                 {{ form.message }}
             </div>
-            <button type="submit" class="btn-gold">Send Message</button>
+            <button type="submit" class="btn-primary">Send message <i class="fa-solid fa-arrow-right"></i></button>
         </form>
     </div>
 </div>
