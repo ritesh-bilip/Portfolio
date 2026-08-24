@@ -103,7 +103,6 @@ class Project(models.Model):
     )
     github_url = models.URLField(blank=True)
     live_url = models.URLField(blank=True)
-    image = models.ImageField(upload_to='projects/', blank=True, null=True)
 
     is_featured = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
@@ -151,7 +150,6 @@ class Certification(models.Model):
     issue_date = models.CharField(max_length=50)
     credential_url = models.URLField(blank=True)
     order = models.PositiveIntegerField(default=0)
-    certificate_image = models.ImageField(upload_to='cerificate/', blank=True, null=True)
 
     class Meta:
         ordering = ['order', '-id']
