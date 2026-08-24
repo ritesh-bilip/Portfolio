@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}About — Ritesh Das, Python Backend Developer{% endblock %}
+{% block title %}About — Ritesh Kumar DAS, Python Backend Developer{% endblock %}
 
 {% block content %}
 <div class="section-container" id="about-page">
@@ -17,12 +17,6 @@
             <p><strong>Activities:</strong> {{ profile.extracurricular }}</p>
             {% endif %}
 
-            <div class="home-btns" style="margin-top: 1.5rem;">
-                {% if profile.resume_file %}
-                <a href="{{ profile.resume_file.url }}" class="btn-primary" download>Download resume <i
-                        class="fa-solid fa-download"></i></a>
-                {% endif %}
-            </div>
         </div>
 
         <div class="about-card">
