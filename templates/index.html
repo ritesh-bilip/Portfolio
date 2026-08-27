@@ -8,22 +8,37 @@
   <div class="hero-orbit orbit-one"></div>
   <div class="hero-orbit orbit-two"></div>
   <div class="hero-beam"></div>
-  <div class="home-grid">
+  <div class="home-grid" id="home">
     <div class="home-text">
       {% if profile.is_open_to_work %}
       <div class="eyebrow"><span class="status-dot"></span> Available for new collaborations</div>
       {% endif %}
-      <p class="hero-kicker">Python backend engineer / 01 - 05</p>
-      <h1>Engineering intelligent<br><span>systems that scale.</span></h1>
-      <p class="role">Python Backend Developer / Django + AI/ML</p>
+      {% if profile.is_open_to_work %}
+      <p class="hero-kicker">Available for internships / full-time opportunities</p>
+      {% else %}
+      <p class="hero-kicker">Python backend engineer</p>
+      {% endif %}
+      <h1>{{ profile.full_name|default:'Ritesh Kumar Das' }}</h1>
+      <p class="role">{{ profile.tagline|default:'Python Backend Engineer / AI Engineer' }}</p>
       <p class="welcome">{{ profile.summary }}</p>
       <div class="home-btns">
-        <a class="btn-primary" href="{% url 'work' %}">Explore selected work <i
-            class="fa-solid fa-arrow-up-right"></i></a>
-        <a class="btn-quiet" href="{% url 'contact' %}">Start a conversation <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn-primary" href="#projects">View selected work <i class="fa-solid fa-arrow-up-right"></i></a>
+        <a class="btn-quiet" href="mailto:{{ profile.email }}">Contact <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-      <div class="hero-meta"><span>Based in {{ profile.location }}</span><span class="meta-line"></span><span>Available
-          worldwide</span></div>
+      <dl class="hero-meta">
+        <div>
+          <dt>Focus</dt>
+          <dd>Backend + AI</dd>
+        </div>
+        <div>
+          <dt>Core</dt>
+          <dd>Python / Django</dd>
+        </div>
+        <div>
+          <dt>Data</dt>
+          <dd>PostgreSQL</dd>
+        </div>
+      </dl>
     </div>
 
     <div class="home-img-wrap">
@@ -44,14 +59,91 @@
       </div>
     </div>
   </div>
-  <a class="scroll-cue" href="#home-next"><span></span> Scroll to explore</a>
+  <a class="scroll-cue" href="#about"><span></span> Scroll</a>
 </main>
-<section class="home-next" id="home-next">
-  <div class="section-intro"><span class="eyebrow">Backend systems with intelligence</span>
-    <p>I build production-ready Django APIs, data workflows, and AI features that turn complex ideas into useful
-      software.</p>
+<section class="reference-section about-section" id="about">
+  <div class="section-heading"><span class="section-number">01</span><span class="section-label">About</span>
+    <h2>Building systems, learning continuously.</h2>
   </div>
-  <div class="signal-row"><span>01</span><strong>Reliable foundations. Smarter products.</strong><span>Python / Django /
-      AI/ML</span></div>
+  <div class="split-content">
+    <div>
+      <p class="large-copy">{{ profile.summary }}</p>
+      <p class="micro-label">Primary technologies</p>
+      <div class="tech-list">{% for category, skill_list in grouped_skills.items %}{% for skill in skill_list %}<span>{{
+          skill.name }}</span>{% endfor %}{% endfor %}</div>
+    </div>
+    <div class="data-panel"><span class="panel-title">profile.json</span>
+      <dl>
+        <div>
+          <dt>Role</dt>
+          <dd>{{ profile.tagline }}</dd>
+        </div>
+        <div>
+          <dt>Focus</dt>
+          <dd>Backend Engineering + AI</dd>
+        </div>
+        <div>
+          <dt>Primary language</dt>
+          <dd>Python</dd>
+        </div>
+        <div>
+          <dt>Database</dt>
+          <dd>PostgreSQL</dd>
+        </div>
+        <div>
+          <dt>Framework</dt>
+          <dd>Django / DRF</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+<section class="reference-section projects-section" id="projects">
+  <div class="section-heading"><span class="section-number">02</span><span class="section-label">Selected work</span>
+    <h2>Systems I designed, built and shipped.</h2>
+  </div>
+  <div class="project-list">{% for project in projects %}<article class="project-row">
+      <div class="project-index">{{ forloop.counter|stringformat:'02d' }}</div>
+      <div class="project-body"><span class="micro-label">Project {{ forloop.counter|stringformat:'02d' }}</span>
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.short_description }}</p>
+        <div class="tech-list">{% for tech in project.tech_stack %}<span>{{ tech }}</span>{% endfor %}</div>
+        <div class="project-actions">{% if project.github_url %}<a href="{{ project.github_url }}" target="_blank"
+            rel="noreferrer">GitHub <i class="fa-brands fa-github"></i></a>{% endif %}{% if project.live_url %}<a
+            href="{{ project.live_url }}" target="_blank" rel="noreferrer">Live demo <i
+              class="fa-solid fa-arrow-up-right"></i></a>{% endif %}</div>
+      </div>
+    </article>{% empty %}<p>No projects available right now.</p>{% endfor %}</div>
+</section>
+<section class="reference-section stack-section" id="stack">
+  <div class="section-heading"><span class="section-number">03</span><span class="section-label">Stack</span>
+    <h2>A technology constellation, centred on Python.</h2>
+    <p>Tools I use to build reliable systems from the data layer to the API.</p>
+  </div>
+  <div class="stack-cloud">{% for category, skill_list in grouped_skills.items %}{% for skill in skill_list %}<span
+      class="stack-node">{{ skill.name }}</span>{% endfor %}{% endfor %}</div>
+</section>
+<section class="reference-section journey-section" id="journey">
+  <div class="section-heading"><span class="section-number">04</span><span class="section-label">Journey</span>
+    <h2>From fundamentals to systems.</h2>
+  </div>
+  <div class="journey-list">{% for edu in education %}<div><span>{{ edu.period }}</span>
+      <div>
+        <h3>{{ edu.degree }}</h3>
+        <p>{{ edu.institution }}{% if edu.board_or_note %} / {{ edu.board_or_note }}{% endif %}</p>
+      </div>
+    </div>{% empty %}<div><span>Now</span>
+      <div>
+        <h3>Building backend systems</h3>
+        <p>Python, Django, REST APIs and AI/ML.</p>
+      </div>
+    </div>{% endfor %}</div>
+</section>
+<section class="reference-section contact-section" id="contact"><span class="section-label">05 / Contact</span>
+  <h2>Let's build something.</h2>
+  <p>Open to backend development roles, internships and interesting technical collaborations.</p>
+  <div class="contact-actions"><a class="btn-primary" href="mailto:{{ profile.email }}">Email me <i
+        class="fa-solid fa-arrow-up-right"></i></a><a class="btn-quiet" href="{% url 'contact' %}">Send a message <i
+        class="fa-solid fa-arrow-right"></i></a></div>
 </section>
 {% endblock %}

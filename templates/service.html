@@ -13,9 +13,14 @@
         <h2>{{ category }}</h2>
         <div class="tags">
             {% for skill in skill_list %}
-            <span class="tag-item">
-                {% if skill.icon %}<i class="{{ skill.icon }}"></i>{% endif %}
-                {{ skill.name }}
+            <span class="skill-cube">
+                <span class="skill-cube-inner">
+                    <span class="skill-face skill-face--front">
+                        {% if skill.icon %}<i class="{{ skill.icon }}"></i>{% endif %}
+                        {{ skill.name }}
+                    </span>
+                    <span class="skill-face skill-face--back">{{ category }}</span>
+                </span>
             </span>
             {% endfor %}
         </div>

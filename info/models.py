@@ -69,6 +69,11 @@ class Skill(models.Model):
         TOOLS = 'tools', 'Tools'
         CS_FUNDAMENTALS = 'cs_fundamentals', 'CS Fundamentals'
         SOFT_SKILLS = 'soft_skills', 'Soft Skills'
+        ML='ml','ML'
+        ML_Algorithms='algorithms','Algorithms'
+        DL='dl','Dl'
+        DL_Models='model','Model'
+
 
     name = models.CharField(max_length=80)
     category = models.CharField(max_length=20, choices=Category.choices, default=Category.BACKEND)

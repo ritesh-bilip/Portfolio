@@ -1,10 +1,14 @@
 // ── ACTIVE NAV LINK ──
 (function () {
   const page = location.pathname.replace(/\/+$/, "") || "/";
+  const hash = location.hash || "#home";
   document.querySelectorAll(".nav-links a").forEach((a) => {
-    const href =
-      new URL(a.href, location.origin).pathname.replace(/\/+$/, "") || "/";
-    if (href === page) {
+    const link = new URL(a.href, location.origin);
+    const href = link.pathname.replace(/\/+$/, "") || "/";
+    const sameHomeSection =
+      page === "/" && href === "/" && (link.hash || "#home") === hash;
+    const sameRoute = page !== "/" && href === page;
+    if (sameHomeSection || sameRoute) {
       a.classList.add("active");
     }
   });

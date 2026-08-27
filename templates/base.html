@@ -19,15 +19,17 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- ── NAV ── -->
-  <nav>
-    <a class="logo" href="{% url 'index' %}"><span>RK</span> Ritesh Kumar DAS</a>
+  <nav aria-label="Primary navigation">
+    <a class="logo" href="{% url 'index' %}"><span class="logo-mark"><i class="fa-solid fa-circle"></i> RKD</span><span
+        class="logo-divider">/</span><span class="logo-role">PY-BACKEND</span></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'about' %}">About</a></li>
-      <li><a href="{% url 'work' %}">Work</a></li>
-      <li><a href="{% url 'service' %}">Stack</a></li>
-      <li><a href="{% url 'contact' %}">Contact</a></li>
+      <li><a href="{% url 'index' %}#home">Home</a></li>
+      <li><a href="{% url 'index' %}#about">About</a></li>
+      <li><a href="{% url 'index' %}#projects">Projects</a></li>
+      <li><a href="{% url 'index' %}#stack">Stack</a></li>
+      <li><a href="{% url 'index' %}#contact">Contact</a></li>
     </ul>
+    <a class="resume-link" href="{% url 'contact' %}">Resume <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Open navigation menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -36,6 +38,12 @@
   <main class="page-wrap">
     {% block content %}{% endblock %}
   </main>
+
+  <footer class="site-footer">
+    <div><strong>Ritesh Kumar Das</strong><span>Python Backend Developer / AI Engineer</span><small>&copy; 2026 Ritesh
+        Kumar Das</small></div>
+    <div class="footer-status"><span class="status-dot"></span> System online</div>
+  </footer>
 
   <script src="{% static 'nav.js' %}"></script>
 </body>

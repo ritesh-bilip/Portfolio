@@ -28,7 +28,17 @@ class ContactView(generics.CreateAPIView):
 #?------ Django Template Views -------
 def index_page(request):
     profile = Profile.load()
-    return render(request, 'index.html', {'profile': profile})
+    skills = Skill.objects.all()
+    grouped_skills = {}
+    for skill in skills:
+        category = skill.get_category_display()
+        grouped_skills.setdefault(category, []).append(skill)
+    return render(request, 'index.html', {
+        'profile': profile,
+        'projects': Project.objects.all(),
+        'grouped_skills': grouped_skills,
+        'education': Education.objects.all(),
+    })
 
 def about_page(request):
     profile = Profile.load()
