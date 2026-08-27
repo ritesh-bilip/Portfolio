@@ -46,11 +46,7 @@
         <div class="scene-label label-top">PORTFOLIO / 2026</div>
         <div class="scene-label label-bottom">SCROLL TO DISCOVER</div>
         <div class="scene-core">
-          {% if profile.profile_image %}
-          <img src="{{ profile.profile_image.url }}" alt="{{ profile.full_name }}" />
-          {% else %}
-          <div class="home-img-placeholder"><i class="fa-solid fa-cube"></i><span>Backend + AI/ML</span></div>
-          {% endif %}
+          <img src="{% static 'ritesh.jpeg' %}" alt="{{ profile.full_name }}" />
         </div>
         <div class="scene-ring ring-a"></div>
         <div class="scene-ring ring-b"></div>
