@@ -65,8 +65,13 @@
     <div>
       <p class="large-copy">{{ profile.summary }}</p>
       <p class="micro-label">Primary technologies</p>
-      <div class="tech-list">{% for category, skill_list in grouped_skills.items %}{% for skill in skill_list %}<span>{{
-          skill.name }}</span>{% endfor %}{% endfor %}</div>
+      <div class="tech-list">
+        {% for category, skill_list in grouped_skills.items %}
+        {% for skill in skill_list %}
+        <span>{{ skill.name }}</span>
+        {% endfor %}
+        {% endfor %}
+      </div>
     </div>
     <div class="data-panel"><span class="panel-title">profile.json</span>
       <dl>
